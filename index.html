@@ -18,10 +18,10 @@
 </header>
 
 <!--  Products Container  -->
-<ul class="list-group">
+<div class="list-group">
   <!--  Product Container  -->
-  <li class="list-group-item" data-ng-repeat="product in store.products">
-    <h3 product-title></h3>
+  <div class="list-group-item" data-ng-repeat="product in store.products">
+    <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
 
     <!-- Image Gallery  -->
     <div data-ng-controller="GalleryController as gallery" data-ng-show="product.images.length">
@@ -36,33 +36,47 @@
     </div>
 
     <!-- Product Tabs  -->
-    <section data-ng-controller="PanelController as panel">
+    <section data-ng-controller="TabController as tab">
       <ul class="nav nav-pills">
-        <li data-ng-class="{ active:panel.isSet(1) }">
-          <a href data-ng-click="panel.setTab(1)">Description</a>
+        <li data-ng-class="{ active:tab.isSet(1) }">
+          <a href data-ng-click="tab.setTab(1)">Description</a>
         </li>
-        <li data-ng-class="{ active:panel.isSet(2) }">
-          <a href data-ng-click="panel.setTab(2)">Specs</a>
+        <li data-ng-class="{ active:tab.isSet(2) }">
+          <a href data-ng-click="tab.setTab(2)">Specs</a>
         </li>
-        <li data-ng-class="{ active:panel.isSet(3) }">
-          <a href data-ng-click="panel.setTab(3)">Reviews</a>
+        <li data-ng-class="{ active:tab.isSet(3) }">
+          <a href data-ng-click="tab.setTab(3)">Reviews</a>
         </li>
       </ul>
 
       <!--  Description Tab's Content  -->
-      <div data-ng-show="panel.isSet(1)">
-        <h4>Description</h4>
-        <blockquote>{{product.description}}</blockquote>
-      </div>
+      <div data-ng-show="tab.isSet(1)" ng-include="'product-description.html'"></div>
 
       <!--  Spec Tab's Content  -->
-      <div data-ng-show="panel.isSet(2)">
+      <div data-ng-show="tab.isSet(2)">
         <h4>Specs</h4>
-        <blockquote>Shine: {{product.shine}}</blockquote>
+        <ul class="list-unstyled">
+          <li>
+            <strong>Shine</strong>
+            : {{product.shine}}
+          </li>
+          <li>
+            <strong>Faces</strong>
+            : {{product.faces}}
+          </li>
+          <li>
+            <strong>Rarity</strong>
+            : {{product.rarity}}
+          </li>
+          <li>
+            <strong>Color</strong>
+            : {{product.color}}
+          </li>
+        </ul>
       </div>
 
       <!--  Review Tab's Content  -->
-      <div data-ng-show="panel.isSet(3)">
+      <div data-ng-show="tab.isSet(3)">
         <!--  Product Reviews List -->
         <ul>
           <h4>Reviews</h4>
@@ -70,7 +84,7 @@
             <blockquote>
               <strong>{{review.stars}} Stars</strong>
               {{review.body}}
-              <cite class="clearfix">—{{review.author}} on {{review.createdOn | date:'yyyy-mm-dd'}}</cite>
+              <cite class="clearfix">—{{review.author}}</cite>
             </blockquote>
           </li>
         </ul>
@@ -107,8 +121,10 @@
           </fieldset>
         </form>
       </div>
+
     </section>
-  </li>
-</ul>
+  </div>
+
+</div>
 </body>
 </html>
