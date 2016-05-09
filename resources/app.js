@@ -1,11 +1,11 @@
 (function () {
-	var app = angular.module('store', ["store-products"]);
+	var app = angular.module('gemStore', []);
 
 	app.controller('StoreController', function () {
 		this.products = gems;
 	});
 
-	app.controller("ReviewController", function () {
+	app.controller('ReviewController', function () {
 
 		this.review = {};
 
@@ -16,7 +16,7 @@
 
 	});
 
-	app.directive("productDescriptions", function () {
+	app.directive("productDescription", function () {
 		return {
 			restrict:    'E',
 			templateUrl: "product-description.html"
@@ -37,6 +37,38 @@
 		};
 	});
 
+	app.directive("productTabs", function () {
+		return {
+			restrict:     "E",
+			templateUrl:  "product-tabs.html",
+			controller:   function () {
+				this.tab = 1;
+
+				this.isSet = function (checkTab) {
+					return this.tab === checkTab;
+				};
+
+				this.setTab = function (activeTab) {
+					this.tab = activeTab;
+				};
+			},
+			controllerAs: "tab"
+		};
+	});
+
+	app.directive("productGallery", function () {
+		return {
+			restrict:     "E",
+			templateUrl:  "product-gallery.html",
+			controller:   function () {
+				this.current    = 0;
+				this.setCurrent = function (imageNumber) {
+					this.current = imageNumber || 0;
+				};
+			},
+			controllerAs: "gallery"
+		};
+	});
 	var gems = [
 		{
 			name:        'Azurite',
@@ -51,15 +83,7 @@
 				"images/gem-05.gif",
 				"images/gem-09.gif"
 			],
-			reviews:     [{
-				stars:  5,
-				body:   "I love this gem!",
-				author: "joe@example.org"
-			}, {
-				stars:  1,
-				body:   "This gem sucks.",
-				author: "tim@example.org"
-			}]
+			reviews:     []
 		}, {
 			name:        'Bloodstone',
 			description: "Origin of the Bloodstone is unknown, hence its low value. It has a very high shine and 12 sides, however.",
@@ -73,15 +97,7 @@
 				"images/gem-03.gif",
 				"images/gem-04.gif"
 			],
-			reviews:     [{
-				stars:  3,
-				body:   "I think this gem was just OK, could honestly use more shine, IMO.",
-				author: "JimmyDean@example.org"
-			}, {
-				stars:  4,
-				body:   "Any gem with 12 faces is for me!",
-				author: "gemsRock@example.org"
-			}]
+			reviews:     []
 		}, {
 			name:        'Zircon',
 			description: "Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high shine gem.",
@@ -95,19 +111,7 @@
 				"images/gem-07.gif",
 				"images/gem-08.gif"
 			],
-			reviews:     [{
-				stars:  1,
-				body:   "This gem is WAY too expensive for its rarity value.",
-				author: "turtleguyy@example.org"
-			}, {
-				stars:  1,
-				body:   "BBW: High Shine != High Quality.",
-				author: "LouisW407@example.org"
-			}, {
-				stars:  1,
-				body:   "Don't waste your rubles!",
-				author: "nat@example.org"
-			}]
+			reviews:     []
 		}
 	];
 })();
