@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="gemStore">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS</title>
+  <link rel="stylesheet" href="resources/index.css"/>
+  <!-- TODO{Gleb Panteleyev}: Download libs -->
+  <link rel="stylesheet" href="resources/bootstrap.min.css"/>
+  <script type="text/javascript" src="resources/angular.min.js"></script>
+  <script type="text/javascript" src="resources/app.js"></script>
+</head>
+<body class="list-group" data-ng-controller="StoreController as store">
+<header>
+  <h1 class="text-center">Flatlander Crafted Gems</h1>
+  <h2 class="text-center">– an Angular store –</h2>
+</header>
+<ul>
+  <li class="list-group-item" data-ng-repeat="product in store.products">
+    <h3>
+      {{product.name}}
+      <em class="pull-right">{{product.price | currency}}</em>
+    </h3>
+
+    <!-- Image Gallery  -->
+    <div class="gallery" data-ng-show="product.images.length" data-ng-controller="GalleryController as cntrl">
+      <img data-ng-src="{{product.images[cntrl.current]}}"/>
+      <ul class="list-inline thumbs">
+        <li class="thumbnail" data-ng-repeat="image in product.images">
+          <img data-ng-src="{{image}}"/>
+        </li>
+      </ul>
+    </div>
+
+    <section class="tab" data-ng-controller="TabController as panel">
+      <ul class="nav nav-pills">
+        <li data-ng-class="{active:panel.isSet(1)}">
+          <a href data-ng-click="panel.setTab(1)">Description</a></li>
+        <li data-ng-class="{active:panel.isSet(2)}">
+          <a href data-ng-click="panel.setTab(2)">Specs</a></li>
+        <li data-ng-class="{active:panel.isSet(3)}">
+          <a href data-ng-click="panel.setTab(3)">Reviews</a></li>
+      </ul>
+      <div data-ng-show="panel.isSet(1)">
+        <h4>Description</h4>
+        <blockquote>{{product.description}}</blockquote>
+      </div>
+      <div data-ng-show="panel.isSet(2)">
+        <h4>Specs</h4>
+        <blockquote>Shine: {{product.shine}}</blockquote>
+      </div>
+      <div class="panel" data-ng-show="panel.isSet(3)">
+        <h4>Reviews</h4>
+        <blockquote data-ng-repeat="review in product.reviews">
+          <b>Stars: {{review.stars}}</b>
+          {{review.body}}
+          <cite>by: {{review.author}}</cite>
+        </blockquote>
+        <blockquote>
+          <b>Stars: {{review.stars}}</b>
+          {{review.body}}
+          <cite>by: {{review.author}}</cite>
+        </blockquote>
+        <form name="reviewForm">
+          <select data-ng-model="review.stars">
+            <option value="1">1 star</option>
+            <option value="2">2 stars</option>
+            <option value="3">3 stars</option>
+            <option value="4">4 stars</option>
+            <option value="5">5 stars</option>
+          </select>
+          <textarea data-ng-model="review.body"></textarea>
+          <label>by:</label>
+          <input data-ng-model="review.author" type="email" />
+
+          <input data-ng-model="review.color" type="radio" value="red" /> Red<br />
+          <input data-ng-model="review.color" type="radio" value="blue" /> Blue<br />
+          <input data-ng-model="review.color" type="radio" value="green" /> Green<br />
+
+          <input data-ng-model="review.terms" type="checkbox" /> I agree to the terms
+          <input type="submit" />
+        </form>
+      </div>
+    </section>
+  </li>
+</ul>
+</body>
+</html>
