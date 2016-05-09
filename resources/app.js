@@ -12,7 +12,7 @@
 		this.products = gems;
 	});
 
-	app.controller("TabController", function () {
+/*	app.controller("TabController", function () {
 		this.tab = 1;
 
 		this.isSet = function (checkTab) {
@@ -22,7 +22,7 @@
 		this.setTab = function (setTab) {
 			this.tab = setTab;
 		};
-	});
+	});*/
 
 	app.controller("ReviewController", function () {
 
@@ -33,6 +33,32 @@
 			this.review = {};
 		};
 
+	});
+
+	app.directive("productTitle", function () {
+		return {
+			restrict:    'E',
+			templateUrl: "product-title.html"
+		};
+	});
+
+	app.directive("productPanels", function () {
+		return {
+			restrict:     'E',
+			templateUrl:  "product-panels.html",
+			controller:    function () {
+				this.tab = 1;
+
+				this.isSelected = function (checkTab) {
+					return this.tab === checkTab;
+				};
+
+				this.selectTab = function (setTab) {
+					this.tab = setTab;
+				};
+			},
+			controllerAs: 'panels'
+		};
 	});
 
 	app.directive("productDescriptions", function () {
@@ -49,9 +75,9 @@
 		};
 	});
 
-	app.directive("productSpecs", function(){
+	app.directive("productSpecs", function () {
 		return {
-			restrict: 'A',
+			restrict:    'A',
 			templateUrl: "product-specs.html"
 		};
 	});
