@@ -11,10 +11,11 @@
 </ul>
 
 <!--  Review Form -->
-<form name="reviewForm" data-ng-controller="ReviewController as reviewCtrl" data-ng-submit="reviewCtrl.addReview(product)">
+<form name="reviewForm" data-ng-controller="ReviewController as reviewCtrl"
+      data-ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
 
   <!--  Live Preview -->
-  <blockquote >
+  <blockquote>
     <strong>{{reviewCtrl.review.stars}} Stars</strong>
     {{reviewCtrl.review.body}}
     <cite class="clearfix">—{{reviewCtrl.review.author}}</cite>
@@ -23,17 +24,20 @@
   <!--  Review Form -->
   <h4>Submit a Review</h4>
   <fieldset class="form-group">
-    <select data-ng-model="reviewCtrl.review.stars" class="form-control" data-ng-options="stars for stars in [5,4,3,2,1]" title="Stars">
+    <select data-ng-model="reviewCtrl.review.stars" class="form-control"
+            data-ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
       <option value>Rate the Product</option>
     </select>
   </fieldset>
   <fieldset class="form-group">
-    <textarea data-ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+    <textarea data-ng-model="reviewCtrl.review.body" class="form-control"
+              placeholder="Write a short review of the product..." title="Review" required></textarea>
   </fieldset>
   <fieldset class="form-group">
-    <input data-ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
+    <input data-ng-model="reviewCtrl.review.author" type="email" class="form-control"
+           placeholder="jimmyDean@example.org" title="Email" required/>
   </fieldset>
   <fieldset class="form-group">
-    <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+    <input type="submit" class="btn btn-primary pull-right" value="Submit Review"/>
   </fieldset>
 </form>
