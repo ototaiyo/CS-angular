@@ -12,8 +12,6 @@
 # Sensitive or high-churn files:
 .idea/dataSources.ids
 .idea/dataSources.xml
-/resources/bootstrap.min.css
-/resources/angular.min.js
 .idea/dataSources.local.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
@@ -66,3 +64,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Created by .ignore support plugin (hsz.mobi)
+
+
+#/resources/bootstrap.min.css
+#/resources/angular.min.js
