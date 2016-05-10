@@ -12,7 +12,7 @@
 
 <!--  Review Form -->
 <form name="reviewForm" data-ng-controller="ReviewController as reviewCtrl"
-      data-ng-submit="reviewCtrl.addReview(product)">
+      data-ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
 
   <!--  Live Preview -->
   <blockquote>
@@ -26,7 +26,7 @@
   <fieldset class="form-group">
     <select data-ng-model="reviewCtrl.review.stars" class="form-control"
             data-ng-options="stars for stars in [5,4,3,2,1]"
-            title="Stars">
+            title="Stars" required>
       <option value>Rate the Product</option>
     </select>
   </fieldset>
@@ -37,7 +37,7 @@
   <fieldset class="form-group">
     <input data-ng-model="reviewCtrl.review.author" type="email" class="form-control"
            placeholder="jimmyDean@example.org"
-           title="Email"/>
+           title="Email" required/>
   </fieldset>
   <fieldset class="form-group">
     <input type="submit" class="btn btn-primary pull-right" value="Submit Review"/>
