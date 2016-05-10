@@ -54,5 +54,4 @@
       controllerAs: "gallery"
     };
   });
-
 })();
